@@ -1,0 +1,47 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by coverage tools like istanbul/nyc
+coverage/
+.nyc_output/
+
+# dotenv environment variables file
+.env
+
+# VS Code settings folder
+.vscode/
+
+# Mac system files
+.DS_Store
+
+# npm package lock files (optional: commit or ignore based on your preference)
+package-lock.json
+yarn.lock
+
+# Temporary files/folders
+tmp/
+temp/
+
+# PDF files (optional: if you don't want to commit large PDFs)
+*.pdf
+
+# State files created by pdfcrack
+*.state
+
+# Other OS junk files
+Thumbs.db
+test-encrypted.pdf
+test.js
