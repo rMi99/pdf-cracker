@@ -204,7 +204,7 @@ const all = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
 ## License
 
-MIT License © Your Name or Organization
+MIT License © rMi99 or Organization
 
 ---
 
