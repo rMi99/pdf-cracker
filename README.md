@@ -1,32 +1,32 @@
 # PDF Password Cracker (Node.js Wrapper for pdfcrack)
 
-This Node.js project provides a simple interface to [pdfcrack](https://pdfcrack.sourceforge.io/), a command-line tool to recover passwords from encrypted PDF files via brute force or dictionary attacks.
+This Node.js package provides a simple interface to [pdfcrack](https://pdfcrack.sourceforge.io/), a command-line tool for recovering passwords from encrypted PDF files using brute force or dictionary attacks.
 
 ---
 
 ## Features
 
-- **Brute force attack** with configurable password length range and character set
-- **Dictionary attack** using a wordlist file
-- **Resume** password cracking from a saved state file
-- Show **pdfcrack version** info
-- Live output logging during cracking process
+* Brute force attack with configurable password length range and charset
+* Dictionary attack using a wordlist file
+* Resume password cracking from a saved state file
+* Show pdfcrack version information
+* Live output logging during cracking process
 
 ---
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) (v12+ recommended)
-- [`pdfcrack`](https://pdfcrack.sourceforge.io/) installed and available in your system's PATH
+* [Node.js](https://nodejs.org/) (v12 or newer recommended)
+* [`pdfcrack`](https://pdfcrack.sourceforge.io/) installed and accessible in your system's PATH
 
-### Install `pdfcrack` on Ubuntu/Debian
+### Installing pdfcrack on Ubuntu/Debian
 
 ```bash
 sudo apt-get update
 sudo apt-get install pdfcrack
-````
+```
 
-Check installation:
+Verify installation:
 
 ```bash
 pdfcrack -v
@@ -36,15 +36,15 @@ pdfcrack -v
 
 ## Installation
 
-1. Clone this repository or copy the files to your project directory.
+Clone this repository or copy the source files to your project directory.
 
-2. Ensure dependencies are installed (none external needed for this wrapper):
+Install any dependencies (none external needed for this wrapper):
 
 ```bash
 npm install
 ```
 
-3. Place your encrypted PDF file in the project folder or specify the full path in the code.
+Place your encrypted PDF file in the project folder or specify the full path in your code.
 
 ---
 
@@ -58,7 +58,7 @@ const {
   crackDictionary,
   resumeCrack,
   showVersion,
-} = require('./index');
+} = require('pdf-cracker'); // or './index' if local
 ```
 
 ### Brute force attack example
@@ -93,7 +93,7 @@ const wordlistFile = './wordlist.txt';
 })();
 ```
 
-### Resume cracking from a state file
+### Resume cracking from a saved state file
 
 ```js
 const stateFile = './statefile.state';
@@ -123,29 +123,29 @@ const stateFile = './statefile.state';
 
 ### `crackBruteForce(pdfFilePath, minLength, maxLength, charset)`
 
-* `pdfFilePath` — Path to the encrypted PDF file
-* `minLength` — Minimum password length to try
-* `maxLength` — Maximum password length to try
+* `pdfFilePath` — Path to encrypted PDF file
+* `minLength` — Minimum password length to try (number)
+* `maxLength` — Maximum password length to try (number)
 * `charset` — String of characters to use for brute forcing
 
-Returns a Promise that resolves with the found password or rejects if not found.
+Returns a Promise resolving to the found password string or rejects if not found.
 
 ---
 
 ### `crackDictionary(pdfFilePath, wordlistFile)`
 
-* `pdfFilePath` — Path to the encrypted PDF file
-* `wordlistFile` — Path to the dictionary wordlist file
+* `pdfFilePath` — Path to encrypted PDF file
+* `wordlistFile` — Path to dictionary wordlist file
 
-Returns a Promise that resolves with the found password or rejects if not found.
+Returns a Promise resolving to the found password or rejects if not found.
 
 ---
 
 ### `resumeCrack(stateFile)`
 
-* `stateFile` — Path to the saved state file to resume cracking
+* `stateFile` — Path to saved state file to resume cracking
 
-Returns a Promise that resolves with the found password or rejects if not found.
+Returns a Promise resolving to the found password or rejects if not found.
 
 ---
 
@@ -157,38 +157,37 @@ Returns a Promise resolving to the pdfcrack version string.
 
 ## Notes
 
-* The project expects `pdfcrack` to be installed and accessible in your system's PATH.
-* Brute forcing passwords with large max lengths and big charsets can take significant time.
-* Use dictionary attacks with good wordlists when possible for faster cracking.
-* The regex used to detect the found password matches output like:
-  `found user-password: 'password'`
+* This package requires `pdfcrack` to be installed and in your system PATH.
+* Brute forcing with large max lengths and charsets can take a very long time. Use dictionary attacks when possible.
+* The regex used for detecting the found password matches output lines like: `User password found: password`
 
 ---
 
-## Test
-```
+## Test example
+
+```js
 const {
   crackBruteForce,
   crackDictionary,
   resumeCrack,
   showVersion,
-} = require('./index');
+} = require('pdf-cracker');
 
-const all = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
 (async () => {
   try {
-    const pdfPath = 'test-encrypted.pdf'; // update path as needed
+    const pdfPath = 'test-encrypted.pdf';
 
     console.log('Running brute force...');
-    const password = await crackBruteForce(pdfPath, 1, 8, all);
+    const password = await crackBruteForce(pdfPath, 1, 8, charset);
     console.log('Password found:', password);
 
     // Uncomment to try dictionary attack:
     // const dictPassword = await crackDictionary(pdfPath, './wordlist.txt');
     // console.log('Dictionary attack found password:', dictPassword);
 
-    // Uncomment to resume cracking from a saved state:
+    // Uncomment to resume cracking:
     // const resumedPassword = await resumeCrack('./statefile.state');
     // console.log('Resumed cracking found password:', resumedPassword);
 
@@ -202,15 +201,16 @@ const all = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 })();
 ```
 
+---
+
 ## License
 
-MIT License © rMi99 or Organization
+MIT License © rMi99 or Your Organization
 
 ---
 
 ## Acknowledgments
 
-* [pdfcrack](https://pdfcrack.sourceforge.io/) — PDF password recovery tool
+* [pdfcrack](https://pdfcrack.sourceforge.io/) — the underlying PDF password recovery tool
 * Inspired by CLI usage, wrapped for Node.js convenience
-
 
