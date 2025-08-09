@@ -1,12 +1,27 @@
 {
-  "name": "pdf-password-cracker",
+  "name": "pdf-cracker",
   "version": "1.0.0",
+  "description": "Node.js wrapper for pdfcrack to brute force and dictionary attack PDF passwords",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rMi99/pdf-cracker.git"
+  },
+  "keywords": [
+    "pdf",
+    "password",
+    "cracker",
+    "pdfcrack",
+    "bruteforce",
+    "dictionary"
+  ],
+  "author": "Ramisha Gimhana",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rMi99/pdf-cracker/issues"
+  },
+  "homepage": "https://github.com/rMi99/pdf-cracker#readme"
 }
